@@ -37,34 +37,23 @@
 
 		<!-- We need to load axios first! -->
 		<script>
-			let url=`https://simpsons-quotes-api.herokuapp.com/quotes?count=1`;
-			fetch(url)
-			.then(function(response) {
-				return response.json();
-			})
-			.then(function(jokes) {
-				let display = `
-				<p><strong>${jokes[0].character}</strong></p>
-				<p><strong>${jokes[0].quote}</strong></p>
-				<img src="${jokes[0].image}" />
-			`;
-				document.querySelector('#chuck-norris').innerHTML = display;
-			});
-			document.getElementById("myBtn").addEventListener("click", function() {
-				let url=`https://simpsons-quotes-api.herokuapp.com/quotes?count=1`;
+			let blague = ()=> {
+				let url = `https://simpsons-quotes-api.herokuapp.com/quotes?count=1`;
 				fetch(url)
-						.then(function(response) {
-							return response.json();
-						})
-						.then(function(jokes) {
+						.then(response => response.json())
+						.then(response => {
 							let display = `
-							<p><strong>${jokes[0].character}</strong></p>
-							<p><strong>${jokes[0].quote}</strong></p>
-							<img src="${jokes[0].image}" />
-						`;
+								<p><strong>${response[0].character}</strong></p>
+								<p><strong>${response[0].quote}</strong></p>
+								<img src="${response[0].image}" />
+								`;
 							document.querySelector('#chuck-norris').innerHTML = display;
-						});
+						})
+			}
+			document.getElementById("myBtn").addEventListener("click", function() {
+				return blague();
 			});
+			blague();
 		</script>
 	</body>
 </html>
