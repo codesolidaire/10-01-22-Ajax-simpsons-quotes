@@ -30,17 +30,41 @@
 		<section class="section">
 			<div class="container">
 				<h1 class="title">Simpson API</h1>
-
+				<button id="myBtn">Nouvel blague?</button>
 				<div class="content" id="chuck-norris"></div>
 			</div>
 		</section>
 
 		<!-- We need to load axios first! -->
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"
-			integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs="
-			crossorigin="anonymous"
-		></script>
-		<script></script>
+		<script>
+			let url=`https://simpsons-quotes-api.herokuapp.com/quotes?count=1`;
+			fetch(url)
+			.then(function(response) {
+				return response.json();
+			})
+			.then(function(jokes) {
+				let display = `
+				<p><strong>${jokes[0].character}</strong></p>
+				<p><strong>${jokes[0].quote}</strong></p>
+				<img src="${jokes[0].image}" />
+			`;
+				document.querySelector('#chuck-norris').innerHTML = display;
+			});
+			document.getElementById("myBtn").addEventListener("click", function() {
+				let url=`https://simpsons-quotes-api.herokuapp.com/quotes?count=1`;
+				fetch(url)
+						.then(function(response) {
+							return response.json();
+						})
+						.then(function(jokes) {
+							let display = `
+							<p><strong>${jokes[0].character}</strong></p>
+							<p><strong>${jokes[0].quote}</strong></p>
+							<img src="${jokes[0].image}" />
+						`;
+							document.querySelector('#chuck-norris').innerHTML = display;
+						});
+			});
+		</script>
 	</body>
 </html>
